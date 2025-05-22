@@ -72,7 +72,7 @@ const TablaConFiltro = ({ datos }) => {
 
   return (
     <div className="tabla-contenedor">
-        <button onClick={exportToExcel} style={{ marginBottom: "10px" }}>
+        <button onClick={exportToExcel} style={{ marginBottom: "10px", backgroundColor: 'green', color: 'white' }}>
             Exportar a Excel
         </button>       
       <table className="tabla">
