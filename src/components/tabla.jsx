@@ -1,4 +1,5 @@
 import  { useEffect, useMemo, useState } from "react";
+import { utils, writeFile } from "xlsx";
 import '../styles/tabla.css'
 import {
   useReactTable,
