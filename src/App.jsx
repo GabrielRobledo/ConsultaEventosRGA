@@ -1,13 +1,18 @@
-import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom';
+import BasicLayout from './components/layout';
 import Tabla from './components/tabla'
 import CargarExcelYMostrarTabla from './components/cargarExcel'
 
 
-function App() {
-
+const App = () => {
   return (
-    <CargarExcelYMostrarTabla/>
-  )
-}
+    <Routes>
+      <Route path="/" element={<BasicLayout />}>
+        <Route index element={<CargarExcelYMostrarTabla />} />
+        {/* Puedes añadir más rutas aquí en el futuro */}
+      </Route>
+    </Routes>
+  );
+};
 
-export default App
+export default App;
