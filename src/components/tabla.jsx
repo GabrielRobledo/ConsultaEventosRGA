@@ -53,14 +53,14 @@ const TablaConFiltro = ({ datos }) => {
     setPageIndex(0); // Reseteamos la página a la primera cuando cambia el filtro
   }, [columnFilters]);
 
-    const exportToExcel = () => {
+  const exportToExcel = () => {
     // Convierte los datos filtrados a un array de objetos plano (sin celdas de react-table)
     const dataToExport = filteredRows.map((row) => {
-        const obj = {};
-        row.getVisibleCells().forEach((cell) => {
+      const obj = {};
+      row.getVisibleCells().forEach((cell) => {
         obj[cell.column.id] = cell.getValue();
-        });
-        return obj;
+      });
+      return obj;
     });
 
     const worksheet = utils.json_to_sheet(dataToExport);
@@ -72,17 +72,26 @@ const TablaConFiltro = ({ datos }) => {
 
   return (
     <div className="tabla-contenedor">
-        <button onClick={exportToExcel} style={{ marginBottom: "10px", backgroundColor: 'green', color: 'white' , padding: '10px', borderRadius: '10px' }}>
-            Exportar a Excel
-        </button>       
+      <button
+        onClick={exportToExcel}
+        className="boton"
+        style={{ marginBottom: "10px" }}
+      >
+        Exportar a Excel
+      </button>
       <table className="tabla">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th key={header.id}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                  <div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </span>
                     {header.column.getCanFilter() ? (
                       <input
                         type="text"
@@ -90,6 +99,7 @@ const TablaConFiltro = ({ datos }) => {
                           header.column.setFilterValue(e.target.value)
                         }
                         placeholder={`Filtrar...`}
+                        style={{ marginTop: "5px", fontSize: "12px", padding: "5px" }}
                       />
                     ) : null}
                   </div>
@@ -116,6 +126,7 @@ const TablaConFiltro = ({ datos }) => {
         <button
           onClick={() => setPageIndex((p) => Math.max(p - 1, 0))}
           disabled={pageIndex === 0}
+          className="boton"
         >
           Anterior
         </button>
@@ -125,6 +136,7 @@ const TablaConFiltro = ({ datos }) => {
         <button
           onClick={() => setPageIndex((p) => Math.min(p + 1, totalPages - 1))}
           disabled={pageIndex >= totalPages - 1}
+          className="boton"
         >
           Siguiente
         </button>
